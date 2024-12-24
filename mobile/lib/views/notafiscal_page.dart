@@ -20,21 +20,19 @@ class NotafiscalPage extends StatelessWidget {
                 NotaFiscalField(
                   label: 'Codigo NF',
                   value: notaFiscal.id,
-                  width: double.infinity,
+                  textStyle: TextStyle(fontSize: 12.5),
                 ),
                 Row(
                   children: [
                     NotaFiscalField(
                       label: 'Data Emissão',
                       value: DateFormat('dd/MM/yyyy').format(notaFiscal.data),
-                      width: 30,
                     ),
                     SizedBox(width: 20),
                     NotaFiscalField(
                       label: 'Valor Nota',
                       value: NumberFormat('###,###.00', 'pt_BR')
                           .format(notaFiscal.valor),
-                      width: double.infinity,
                     )
                   ],
                 )
@@ -46,7 +44,7 @@ class NotafiscalPage extends StatelessWidget {
                   NotaFiscalField(
                     label: 'Nome/Razão Social',
                     value: notaFiscal.emitente.nome,
-                    width: 30,
+                    width: 150,
                   ),
                   SizedBox(width: 20),
                   NotaFiscalField(
@@ -55,7 +53,6 @@ class NotafiscalPage extends StatelessWidget {
                     value: (notaFiscal.emitente is PessoaFisica)
                         ? (notaFiscal.emitente as PessoaFisica).cpf
                         : (notaFiscal.emitente as PessoaJuridica).cnpj,
-                    width: double.infinity,
                   )
                 ])
               ])),
@@ -91,35 +88,38 @@ class NotaFiscalSection extends StatelessWidget {
 class NotaFiscalField extends StatelessWidget {
   final String label;
   final String value;
-  final double width;
+  final TextStyle textStyle;
+  final double? width;
   const NotaFiscalField(
       {super.key,
       required this.label,
       required this.value,
-      required this.width});
+      this.textStyle = const TextStyle(fontSize: 14.0),
+      this.width});
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0)),
-        Row(
+    return SizedBox(
+        width: width,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              width: width,
-              padding: EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                color: Color.fromRGBO(255, 255, 180, 1.0),
-                border: Border.all(color: Color.fromRGBO(203, 203, 130, 1.0)),
-              ),
-              child: Center(
-                child: Text(value),
-              ),
+            Text(label,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0)),
+            Row(
+              children: [
+                Flexible(
+                    child: Container(
+                  padding: EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    color: Color.fromRGBO(255, 255, 180, 1.0),
+                    border:
+                        Border.all(color: Color.fromRGBO(203, 203, 130, 1.0)),
+                  ),
+                  child: Center(child: SelectableText(value, style: textStyle)),
+                ))
+              ],
             )
           ],
-        )
-      ],
-    );
+        ));
   }
 }

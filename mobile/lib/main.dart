@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
               // Emitente é uma PessoaJuridica
               emitente: PessoaJuridica(
                 cnpj: '00.000.000/0001-01',
-                nome: 'Empresa A',
+                nome: 'FREEDOM IT LTDA CHUPISCO MARAGAO',
                 endereco: Endereco(
                     municipio: 'Itapeva', estado: 'SP', pais: 'Brasil'),
               ),
