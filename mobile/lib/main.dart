@@ -79,7 +79,7 @@ class _NotasWidgetState extends State<NotasWidget> {
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              NotafiscalPage(notaFiscal: widget.notas[index])));
+                              NotafiscalPage(notaFiscal: widget.notas[index],)));
                 },
                 child: Container(
                   margin: EdgeInsets.all(10),

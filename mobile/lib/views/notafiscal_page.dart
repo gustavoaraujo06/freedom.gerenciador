@@ -1,7 +1,7 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:mobile/models/notafiscal.dart';
-import 'package:mobile/models/pessoa_fisica.dart';
-import 'package:mobile/models/pessoa_juridica.dart';
 import 'package:intl/intl.dart';
 
 class NotafiscalPage extends StatelessWidget {
@@ -10,77 +10,55 @@ class NotafiscalPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Detalhes Nota Fiscal'),
-        ),
-        body: Column(children: [
-          NotaFiscalSection(
-              title: 'Dados NF',
-              child: Column(children: [
-                NotaFiscalField(
-                  label: 'Codigo NF',
-                  value: notaFiscal.id,
-                  textStyle: TextStyle(fontSize: 12.5),
-                ),
-                Row(
+      appBar: AppBar(
+        title: Text("Nota 13513"),
+      ),
+      body: Column(
+        children: [
+          Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    NotaFiscalField(
-                      label: 'Data Emissão',
-                      value: DateFormat('dd/MM/yyyy').format(notaFiscal.data),
+                    NotaFiscalCard(
+                      label: "Dados NF",
+                      children: [
+                        [
+                          NotaFiscalField(
+                              label: "Numero NF", value: notaFiscal.id)
+                        ],
+                        [
+                          NotaFiscalField(
+                            label: "Data",
+                            value: DateFormat('dd/MM/yyyy')
+                                .format(notaFiscal.data),
+                          ),
+                          NotaFiscalField(
+                              label: "Valor",
+                              value:
+                                  NumberFormat.simpleCurrency(locale: 'pt_BR')
+                                      .format(notaFiscal.valor))
+                        ]
+                      ],
                     ),
-                    SizedBox(width: 20),
-                    NotaFiscalField(
-                      label: 'Valor Nota',
-                      value: NumberFormat('###,###.00', 'pt_BR')
-                          .format(notaFiscal.valor),
-                    )
-                  ],
-                )
-              ])),
-          NotaFiscalSection(
-              title: 'Emitente',
-              child: Column(children: [
-                Row(children: [
-                  NotaFiscalField(
-                    label: 'Nome/Razão Social',
-                    value: notaFiscal.emitente.nome,
-                    width: 150,
-                  ),
-                  SizedBox(width: 20),
-                  NotaFiscalField(
-                    label:
-                        (notaFiscal.emitente is PessoaFisica) ? 'CPF' : 'CNPJ',
-                    value: (notaFiscal.emitente is PessoaFisica)
-                        ? (notaFiscal.emitente as PessoaFisica).cpf
-                        : (notaFiscal.emitente as PessoaJuridica).cnpj,
-                  )
-                ])
-              ])),
-        ]));
-  }
-}
-
-class NotaFiscalSection extends StatelessWidget {
-  final String title;
-  final Widget child;
-  const NotaFiscalSection(
-      {super.key, required this.title, required this.child});
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text(title,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0)),
-        Container(
-            margin: EdgeInsets.all(5.0),
-            padding: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              color: Color.fromRGBO(253, 253, 150, 1.0),
-              border: Border.all(color: Color.fromRGBO(203, 203, 130, 1.0)),
-            ),
-            child: child)
-      ],
+                    NotaFiscalCard(label: "Emitente", children: [
+                      [
+                        NotaFiscalField(
+                            label: "Nome", value: notaFiscal.emitente.nome)
+                      ],
+                      [
+                        NotaFiscalField(
+                            label: "CNPJ", value: "00.000.000/0000-00")
+                      ],
+                      [
+                        NotaFiscalField(
+                            label: "Endereco",
+                            value: "Rua dos Bobos, 0, Centro, São Paulo - SP")
+                      ]
+                    ])
+                  ]))
+        ],
+      ),
     );
   }
 }
@@ -88,38 +66,59 @@ class NotaFiscalSection extends StatelessWidget {
 class NotaFiscalField extends StatelessWidget {
   final String label;
   final String value;
-  final TextStyle textStyle;
-  final double? width;
-  const NotaFiscalField(
-      {super.key,
-      required this.label,
-      required this.value,
-      this.textStyle = const TextStyle(fontSize: 14.0),
-      this.width});
+
+  const NotaFiscalField({Key? key, required this.label, required this.value})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-        width: width,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(label,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0)),
-            Row(
-              children: [
-                Flexible(
-                    child: Container(
-                  padding: EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    color: Color.fromRGBO(255, 255, 180, 1.0),
-                    border:
-                        Border.all(color: Color.fromRGBO(203, 203, 130, 1.0)),
-                  ),
-                  child: Center(child: SelectableText(value, style: textStyle)),
-                ))
-              ],
-            )
-          ],
-        ));
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+        ),
+        Text(
+          value,
+          style: TextStyle(
+            fontSize: 14.0,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class NotaFiscalCard extends StatelessWidget {
+  final String label;
+  List<List<Widget>> children;
+  NotaFiscalCard({super.key, required this.label, required this.children});
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
+        ),
+        Card(
+            color: Colors.white,
+            surfaceTintColor: Colors.yellow,
+            shadowColor: Colors.black,
+            child: Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Column(
+                  spacing: 10.0,
+                  children: children
+                      .map((e) => Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: e.map((e) => Expanded(child: e)).toList()))
+                      .toList(),
+                )))
+      ],
+    );
   }
 }
