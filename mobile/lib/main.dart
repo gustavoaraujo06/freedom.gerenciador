@@ -51,6 +51,46 @@ class MyApp extends StatelessWidget {
                     valor: 9.0,
                     quantidade: 25,
                     unidadeComercial: 'CM'),
+                Produto(
+                    descricao: 'Pinto de Borracha SOB MEDIDA',
+                    valor: 9.0,
+                    quantidade: 25,
+                    unidadeComercial: 'CM'),
+                Produto(
+                    descricao: 'Pinto de Borracha SOB MEDIDA',
+                    valor: 9.0,
+                    quantidade: 25,
+                    unidadeComercial: 'CM'),
+                Produto(
+                    descricao: 'Pinto de Borracha SOB MEDIDA',
+                    valor: 9.0,
+                    quantidade: 25,
+                    unidadeComercial: 'CM'),
+                Produto(
+                    descricao: 'Pinto de Borracha SOB MEDIDA',
+                    valor: 9.0,
+                    quantidade: 25,
+                    unidadeComercial: 'CM'),
+                Produto(
+                    descricao: 'Pinto de Borracha SOB MEDIDA',
+                    valor: 9.0,
+                    quantidade: 25,
+                    unidadeComercial: 'CM'),
+                Produto(
+                    descricao: 'Pinto de Borracha SOB MEDIDA',
+                    valor: 9.0,
+                    quantidade: 25,
+                    unidadeComercial: 'CM'),
+                Produto(
+                    descricao: 'Pinto de Borracha SOB MEDIDA',
+                    valor: 9.0,
+                    quantidade: 25,
+                    unidadeComercial: 'CM'),
+                Produto(
+                    descricao: 'Pinto de Borracha SOB MEDIDA',
+                    valor: 9.0,
+                    quantidade: 25,
+                    unidadeComercial: 'CM'),
               ],
             ),
           ]),
@@ -78,8 +118,9 @@ class _NotasWidgetState extends State<NotasWidget> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) =>
-                              NotafiscalPage(notaFiscal: widget.notas[index],)));
+                          builder: (context) => NotafiscalPage(
+                                notaFiscal: widget.notas[index],
+                              )));
                 },
                 child: Container(
                   margin: EdgeInsets.all(10),

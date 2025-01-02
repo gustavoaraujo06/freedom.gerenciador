@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:mobile/models/notafiscal.dart';
 import 'package:intl/intl.dart';
+import 'package:mobile/models/pessoa_fisica.dart';
+import 'package:mobile/models/pessoa_juridica.dart';
 
 class NotafiscalPage extends StatelessWidget {
   final NotaFiscal notaFiscal;
@@ -44,16 +46,192 @@ class NotafiscalPage extends StatelessWidget {
                     NotaFiscalCard(label: "Emitente", children: [
                       [
                         NotaFiscalField(
-                            label: "Nome", value: notaFiscal.emitente.nome)
+                            label: "Nome/Razão Social",
+                            value: notaFiscal.emitente.nome)
                       ],
                       [
-                        NotaFiscalField(
-                            label: "CNPJ", value: "00.000.000/0000-00")
+                        notaFiscal.emitente is PessoaFisica
+                            ? NotaFiscalField(
+                                label: "CPF",
+                                value:
+                                    (notaFiscal.emitente as PessoaFisica).cpf)
+                            : NotaFiscalField(
+                                label: "CNPJ",
+                                value: (notaFiscal.emitente as PessoaJuridica)
+                                    .cnpj)
                       ],
                       [
                         NotaFiscalField(
                             label: "Endereco",
                             value: "Rua dos Bobos, 0, Centro, São Paulo - SP")
+                      ]
+                    ]),
+                    NotaFiscalCard(label: "Produtos", children: [
+                      [
+                        TextButton(
+                          onPressed: () {
+                            ScrollController scrollController;
+                            showModalBottomSheet(
+                                context: context,
+                                builder: (context) {
+                                  return SingleChildScrollView(
+                                      child: Padding(
+                                    padding: EdgeInsets.all(10),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "Produtos",
+                                          style: TextStyle(
+                                              fontSize: 22,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Table(
+                                          border: TableBorder.all(),
+                                          defaultVerticalAlignment:
+                                              TableCellVerticalAlignment.middle,
+                                          children: [
+                                            TableRow(
+                                                decoration: BoxDecoration(
+                                                  color: Colors.amber,
+                                                ),
+                                                children: [
+                                                  TableCell(
+                                                      child: Padding(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  5.0),
+                                                          child: Text("NOME"))),
+                                                  TableCell(
+                                                      child: Padding(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  5.0),
+                                                          child:
+                                                              Text("VALOR"))),
+                                                  TableCell(
+                                                      child: Padding(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  5.0),
+                                                          child:
+                                                              Text("UNIDADE"))),
+                                                  TableCell(
+                                                      child: Padding(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  5.0),
+                                                          child: Text("QNTD"))),
+                                                  TableCell(
+                                                      child: Padding(
+                                                          padding:
+                                                              EdgeInsets.all(
+                                                                  5.0),
+                                                          child:
+                                                              Text("TOTAL"))),
+                                                ]),
+                                            ...(notaFiscal.produtos
+                                                .map((produto) {
+                                              return TableRow(children: [
+                                                TableCell(
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsets.all(6.0),
+                                                    child:
+                                                        Text(produto.descricao),
+                                                  ),
+                                                ),
+                                                TableCell(
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsets.all(6.0),
+                                                    child: Text(
+                                                        NumberFormat.currency(
+                                                                locale: "pt_BR",
+                                                                symbol: '',
+                                                                decimalDigits:
+                                                                    2)
+                                                            .format(
+                                                                produto.valor)),
+                                                  ),
+                                                ),
+                                                TableCell(
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsets.all(6.0),
+                                                    child: Text(produto
+                                                        .unidadeComercial),
+                                                  ),
+                                                ),
+                                                TableCell(
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsets.all(6.0),
+                                                    child: Text(produto
+                                                        .quantidade
+                                                        .toString()),
+                                                  ),
+                                                ),
+                                                TableCell(
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsets.all(6.0),
+                                                    child: Text(
+                                                        NumberFormat.currency(
+                                                                locale: "pt_BR",
+                                                                symbol: '',
+                                                                decimalDigits:
+                                                                    2)
+                                                            .format(
+                                                                produto.total)),
+                                                  ),
+                                                )
+                                              ]);
+                                            }))
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ));
+                                });
+                          },
+                          style: TextButton.styleFrom(
+                              backgroundColor: Colors.amber,
+                              foregroundColor: Colors.black),
+                          child: Text("Ver Produtos"),
+                        ),
+                      ]
+                    ]),
+                    NotaFiscalCard(label: "Impostos", children: [
+                      [
+                        TextButton(
+                            onPressed: () => showModalBottomSheet(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Column(
+                                        children: [
+                                          Text("ICMS:"),
+                                          Text("IPI:"),
+                                          Text("PIS:"),
+                                          Text("COFINS:"),
+                                          Text("CSLL:"),
+                                          Text("IRPJ:"),
+                                        ],
+                                      )
+                                    ],
+                                  );
+                                }),
+                            child: Text("Ver Impostos"),
+                            style: TextButton.styleFrom(
+                                backgroundColor: Colors.amber,
+                                foregroundColor: Colors.black)),
                       ]
                     ])
                   ]))
