@@ -13,6 +13,7 @@ class NotasWidget extends StatefulWidget {
 class _NotasWidgetState extends State<NotasWidget> {
   @override
   Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
     return (ListView.builder(
         itemCount: widget.notas.length,
         itemBuilder: (context, index) {
@@ -33,7 +34,7 @@ class _NotasWidgetState extends State<NotasWidget> {
                     15,
                   ),
                   decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: theme.colorScheme.surface,
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(

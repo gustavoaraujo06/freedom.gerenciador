@@ -70,7 +70,6 @@ class NotafiscalPage extends StatelessWidget {
                       [
                         TextButton(
                           onPressed: () {
-                            ScrollController scrollController;
                             showModalBottomSheet(
                                 context: context,
                                 builder: (context) {
