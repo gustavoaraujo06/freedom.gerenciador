@@ -20,7 +20,7 @@ class NotasApp extends StatelessWidget {
           brightness: Brightness.light,
           primary: Colors.blueGrey[700]!,
           onPrimary: Colors.white,
-          secondary: Colors.orange[400]!, // Destaque (ex.: laranja)
+          secondary: Colors.orange[400]!,
           onSecondary: Colors.white,
           error: Colors.red,
           onError: Colors.white,

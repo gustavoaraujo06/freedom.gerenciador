@@ -34,13 +34,10 @@ class Dashboard extends StatelessWidget {
       ),
     );
 
-    /// Agora criamos 12 grupos (um para cada mês), cada grupo com 2 barras
     final barGroups = List.generate(12, (index) {
-      // Cada mês tem duas barras, barRod1 e barRod2
       return BarChartGroupData(
         x: index,
         barRods: index <= 5 ? [barRodPrimary.copyWith(toY: Random().nextDouble() * 600000), barRodSecondary.copyWith(toY: Random().nextDouble() * 600000)] : [barRodPrimary.copyWith(toY: Random().nextDouble() * 600000)],
-        // Espaço entre as duas barras do mesmo grupo
         barsSpace: 4,
       );
     });

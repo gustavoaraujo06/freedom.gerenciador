@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 
-/// Função que exibe o diálogo modal.
-/// Recebe um [isSuccess] para simular se deu certo ou errado.
 Future<void> showLoadingDialog(BuildContext context, bool isSuccess) async {
   return showDialog(
     context: context,
-    barrierDismissible: false, // impede fechar tocando fora
+    barrierDismissible: false,
     builder: (context) {
       return LoadingDialog(isSuccess: isSuccess);
     },
@@ -26,18 +24,10 @@ class _LoadingDialogState extends State<LoadingDialog> {
   @override
   void initState() {
     super.initState();
-    // Simula algum processamento (ex.: chamada de API).
-    // Depois de 2 segundos, altera estado para "carregado" (sucesso/erro).
     Future.delayed(const Duration(seconds: 2), () {
       if (mounted) {
         setState(() {
           isLoading = false;
-        });
-        // Depois de mais 1 seg, fecha o diálogo.
-        Future.delayed(const Duration(seconds: 1), () {
-          if (mounted) {
-            Navigator.of(context).pop(); // fecha o diálogo
-          }
         });
       }
     });
@@ -45,26 +35,47 @@ class _LoadingDialogState extends State<LoadingDialog> {
 
   @override
   Widget build(BuildContext context) {
-    // Card "flutuante"
+    final ThemeData theme = Theme.of(context);
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
-        width: 120,
-        height: 120,
+        width: 240,
+        height: 240,
         padding: const EdgeInsets.all(20),
         child: Center(
           child: isLoading
-              // Mostra circulo de loading se está carregando
-              ? const CircularProgressIndicator()
-              // Caso contrário, mostra ícone de sucesso ou erro
-              : Icon(
-                  widget.isSuccess ? Icons.check_circle : Icons.error,
-                  size: 60,
-                  color: widget.isSuccess ? Colors.green : Colors.red,
-                ),
+              ? const CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.orange),)
+              : InfoMessage(message: "Não Foi Possivel Encontrar a NF", icon: Icons.error, color: theme.colorScheme.error)
         ),
       ),
+    );
+  }
+}
+
+class InfoMessage extends StatelessWidget {
+  final String message;
+  final IconData icon;
+  final Color color;
+  const InfoMessage({super.key, required this.message, required this.icon, required this.color});
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          icon,
+          color: color,
+          size: 60,
+        ),
+        Text(
+          message,
+          style: TextStyle(
+            color: color,
+            fontSize: 16,
+          ),
+        ),
+      ],
     );
   }
 }

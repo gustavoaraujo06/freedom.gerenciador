@@ -32,13 +32,13 @@ class AddNotaState extends State<AddNota> {
                   ElevatedButton(
                     onPressed: () {
                       setState(() {
-                        isLoading = !isLoading;
+                        isLoading = true;
                         Future.delayed(const Duration(seconds: 2), () {
                           if (mounted) {
                             setState(() {
                               isLoading = false;
                             });
-                            showLoadingDialog(context, (Random().nextDouble() > 0.5));
+                            
                           }
                         });
                       });
