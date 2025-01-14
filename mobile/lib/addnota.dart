@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:mobile/confirmNota.dart';
@@ -51,7 +50,7 @@ class AddNotaState extends State<AddNota> {
                                   context: context,
                                   builder: (context) {
                                     return ConfirmNota(
-                                        notaResumo: NotaFiscalResume.fromJson(jsonDecode(response.body) as Map<String, dynamic>)
+                                        nota: NotaFiscal.fromJson(jsonDecode(response.body) as Map<String, dynamic>)
                                     );
                                   });
                             } else {

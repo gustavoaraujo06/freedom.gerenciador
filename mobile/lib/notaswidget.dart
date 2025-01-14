@@ -1,21 +1,22 @@
 import "package:flutter/material.dart";
 import "package:intl/intl.dart";
 import "package:mobile/models/notafiscal.dart";
+import "package:mobile/notas_repository.dart";
 import "package:mobile/views/notafiscal_page.dart";
 
 class NotasWidget extends StatefulWidget {
-  final List<NotaFiscal> notas;
-  const NotasWidget({super.key, required this.notas});
+  const NotasWidget({super.key});
   @override
   State<NotasWidget> createState() => _NotasWidgetState();
 }
 
 class _NotasWidgetState extends State<NotasWidget> {
+  List<NotaFiscal> notas = NotasRepository.getNotas();
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     return (ListView.builder(
-        itemCount: widget.notas.length,
+        itemCount: notas.length,
         itemBuilder: (context, index) {
           return Column(
             children: [
@@ -25,8 +26,12 @@ class _NotasWidgetState extends State<NotasWidget> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => NotafiscalPage(
-                                notaFiscal: widget.notas[index],
-                              )));
+                                notaFiscal: notas[index],
+                              ))).then((_){
+                                setState(() {
+                                  notas = NotasRepository.getNotas();
+                                });
+                              });
                 },
                 child: Container(
                   margin: EdgeInsets.all(10),
@@ -47,12 +52,12 @@ class _NotasWidgetState extends State<NotasWidget> {
                   child: Column(
                     children: [
                       Row(children: [
-                        Expanded(child: Text(widget.notas[index].id)),
+                        Expanded(child: Text(notas[index].id)),
                       ]),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text(widget.notas[index].emitente.nome),
+                          Text(notas[index].emitente.nome),
                         ],
                       ),
                       Row(
@@ -60,13 +65,13 @@ class _NotasWidgetState extends State<NotasWidget> {
                         children: [
                           Text(
                             NumberFormat.simpleCurrency(locale: 'pt_BR')
-                                .format(widget.notas[index].valor),
+                                .format(notas[index].valor),
                             style: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold),
                           ),
                           Text(DateFormat('dd/MM/yyyy')
-                              .format(widget.notas[index].data)),
+                              .format(notas[index].data)),
                         ],
                       )
                     ],

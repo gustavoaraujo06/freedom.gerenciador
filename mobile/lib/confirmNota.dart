@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile/loadingdialog.dart';
 import 'package:mobile/models/notafiscal.dart';
+import 'package:mobile/notas_repository.dart';
 import 'package:mobile/views/notafiscal_page.dart';
 
 class ConfirmNota extends StatelessWidget {
-  final NotaFiscalResume notaResumo;
-  const ConfirmNota({super.key, required this.notaResumo});
+  final NotaFiscal nota;
+  const ConfirmNota({super.key, required this.nota});
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -19,15 +20,15 @@ class ConfirmNota extends StatelessWidget {
               NotaFiscalCard(label: "Nota Fiscal", children: [
                 [
                   NotaFiscalField(
-                      label: "Emitente", value: notaResumo.emitente),
+                      label: "Emitente", value: nota.emitente.nome),
                 ],
                 [
                   NotaFiscalField(
-                      label: "Valor", value: NumberFormat.simpleCurrency(locale: 'pt_BR').format(notaResumo.valor))
+                      label: "Valor", value: NumberFormat.simpleCurrency(locale: 'pt_BR').format(nota.valor))
                 ],
                 [
                   NotaFiscalField(
-                      label: "Data", value: DateFormat('dd/MM/yyyy').format(notaResumo.data))
+                      label: "Data", value: DateFormat('dd/MM/yyyy').format(nota.data))
                 ],
                 [
                   Row(
@@ -50,12 +51,7 @@ class ConfirmNota extends StatelessWidget {
                         ),),
                       ElevatedButton(
                         onPressed: () {
-                          Navigator.of(context).pop();
-                          WidgetsBinding.instance.addPostFrameCallback((_){
-                            showDialog(context: context, builder: (context){
-                              return ErrorDialog(message: "Seloco Num Compensa");
-                            });
-                          });
+                          NotasRepository.addNota(nota);
                         },
                         style: ElevatedButton.styleFrom(
                             shape: CircleBorder(),

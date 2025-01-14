@@ -102,7 +102,7 @@ class NotasHomeState extends State<NotasHome> {
       ),
       body: [
         Dashboard(),
-        NotasWidget(notas: NotasRepository.getNotas()),
+        NotasWidget(),
       ][navigationIndex],
     );
   }
