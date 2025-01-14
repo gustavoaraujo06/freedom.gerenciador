@@ -1,5 +1,7 @@
+import 'dart:collection';
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:mobile/models/endereco.dart';
 import 'package:mobile/models/notafiscal.dart';
 import 'package:mobile/models/pessoa_fisica.dart';
@@ -7,7 +9,7 @@ import 'package:mobile/models/pessoa_juridica.dart';
 import 'package:mobile/models/produto.dart';
 import 'package:http/http.dart' as http;
 
-class NotasRepository {
+class NotasRepository extends ChangeNotifier {
   static Future<String> getToken() async {
     final response = await http.post(
         Uri.parse('https://gateway.apiserpro.serpro.gov.br/token'),
@@ -17,7 +19,7 @@ class NotasRepository {
           'Content-Type': 'application/x-www-form-urlencoded'
         },
         body: "grant_type=client_credentials");
-    final token = jsonDecode(response.toString())['access_token'];
+    final token = jsonDecode(response.body)['access_token'];
     return token;
   }
 
@@ -29,12 +31,16 @@ class NotasRepository {
         headers: {'Authorization': 'Bearer $token'});
   }
 
-  static final List<NotaFiscal> _notas = [];
-  static void addNota(NotaFiscal nota) {
+  final List<NotaFiscal> _notas = [];
+  UnmodifiableListView<NotaFiscal> get notas => UnmodifiableListView(_notas);
+
+  void addNota(NotaFiscal nota) {
     _notas.add(nota);
+    notifyListeners();
   }
 
-  static getNotas() {
-    return _notas;
+  void removeNota(NotaFiscal nota) {
+    _notas.remove(nota);
+    notifyListeners();
   }
 }

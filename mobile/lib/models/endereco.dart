@@ -11,7 +11,7 @@ class Endereco{
       estado: json['UF'],
       pais: json['xPais'],
       logradouro: json['xLgr'],
-      numero: json['nro'] != 'SN' ? int.parse(json['nro']) : 0
+      numero: json['nro'] != 'SN' ? json['nro'] : 0
     );
   }
 }

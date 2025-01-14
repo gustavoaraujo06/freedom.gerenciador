@@ -1,5 +1,5 @@
 class Produto {
-  int codigo;
+  String codigo;
   final String descricao;
   final String unidadeComercial;
   final double valor;
@@ -10,15 +10,19 @@ class Produto {
       required this.unidadeComercial,
       required this.valor,
       required this.quantidade,
-      this.codigo = -1}) {
+      this.codigo = "SC"}) {
     total = quantidade * valor;
   }
   factory Produto.fromJson(Map<String, dynamic> json) {
     return Produto(
-        codigo: int.parse(json['prod']['cProd']),
+        codigo: json['prod']['cProd'] is String
+            ? json['prod']['cProd']
+            : json['prod']['cProd'].toString(),
         descricao: json['prod']['xProd'],
         unidadeComercial: json['prod']['uCom'],
-        valor: double.parse(json['prod']['vUnCom']),
-        quantidade: double.parse(json['prod']['qCom']));
+        valor: json['prod']['vUnCom'] is int
+            ? json['prod']['vUnCom'].toDouble()
+            : json['prod']['vUnCom'],
+        quantidade: (json['prod']['qCom'] as int).toDouble());
   }
 }

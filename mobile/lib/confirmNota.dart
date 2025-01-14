@@ -4,6 +4,7 @@ import 'package:mobile/loadingdialog.dart';
 import 'package:mobile/models/notafiscal.dart';
 import 'package:mobile/notas_repository.dart';
 import 'package:mobile/views/notafiscal_page.dart';
+import 'package:provider/provider.dart';
 
 class ConfirmNota extends StatelessWidget {
   final NotaFiscal nota;
@@ -51,7 +52,8 @@ class ConfirmNota extends StatelessWidget {
                         ),),
                       ElevatedButton(
                         onPressed: () {
-                          NotasRepository.addNota(nota);
+                          Provider.of<NotasRepository>(context, listen: false).addNota(nota);
+                          Navigator.of(context).pop(true);
                         },
                         style: ElevatedButton.styleFrom(
                             shape: CircleBorder(),

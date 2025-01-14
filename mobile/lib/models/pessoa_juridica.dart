@@ -10,7 +10,7 @@ class PessoaJuridica extends Pessoa{
       required super.endereco});
       factory PessoaJuridica.fromJson(Map<String, dynamic> json, {bool isEmitente  = true}){
         return PessoaJuridica(
-          cnpj: json['CNPJ'],
+          cnpj: json['CNPJ'] is String ? json['CNPJ'] : json['CNPJ'].toString(),
           nome: json['xNome'],
           endereco: Endereco.fromJson(isEmitente ? json['enderEmit'] : json['enderDest'])
         );

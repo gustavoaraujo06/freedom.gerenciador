@@ -4,9 +4,14 @@ import 'package:mobile/dashboard.dart';
 import 'package:mobile/loadingdialog.dart';
 import 'package:mobile/notas_repository.dart';
 import 'package:mobile/notaswidget.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const NotasApp());
+  runApp(
+    ChangeNotifierProvider(create: (context) => NotasRepository(),
+    child: const NotasApp(),
+    ),
+  );
 }
 
 class NotasApp extends StatelessWidget {

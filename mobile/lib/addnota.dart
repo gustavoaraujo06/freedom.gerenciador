@@ -50,7 +50,7 @@ class AddNotaState extends State<AddNota> {
                                   context: context,
                                   builder: (context) {
                                     return ConfirmNota(
-                                        nota: NotaFiscal.fromJson(jsonDecode(response.body) as Map<String, dynamic>)
+                                        nota: NotaFiscal.fromJson(jsonDecode(response.body) as Map<String, dynamic>,),
                                     );
                                   });
                             } else {
