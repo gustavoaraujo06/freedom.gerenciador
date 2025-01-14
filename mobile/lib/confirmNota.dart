@@ -50,12 +50,7 @@ class ConfirmNota extends StatelessWidget {
                         ),),
                       ElevatedButton(
                         onPressed: () {
-                          Navigator.of(context).pop();
-                          WidgetsBinding.instance.addPostFrameCallback((_){
-                            showDialog(context: context, builder: (context){
-                              return ErrorDialog(message: "Seloco Num Compensa");
-                            });
-                          });
+                          
                         },
                         style: ElevatedButton.styleFrom(
                             shape: CircleBorder(),

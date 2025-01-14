@@ -19,12 +19,11 @@ class NotasRepository {
         },
         body: "grant_type=client_credentials"
     );
-    final token = jsonDecode(response.toString())['access_token'];
+    final token = jsonDecode(response.body)['access_token'];
     return token;
   }
   static Future<http.Response> getNFE(final String chaveAcesso) async{
     String token = await getToken();
-    print(token);
     return http.get(
       Uri.parse('https://gateway.apiserpro.serpro.gov.br/consulta-nfe-df/api/v1/nfe/$chaveAcesso'),
       headers: {

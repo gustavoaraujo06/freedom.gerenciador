@@ -24,7 +24,6 @@ class NotaFiscalResume{
   DateTime data;
   NotaFiscalResume({required this.emitente, required this.valor, required this.data});
   factory NotaFiscalResume.fromJson(Map<String, dynamic> json){
-    print(json['nfeProc']['NFe']['infNFe']['total']['ICMSTot']);
     return NotaFiscalResume(
       emitente: json['nfeProc']['NFe']['infNFe']['emit']['xFant'],
       valor: (json['nfeProc']['NFe']['infNFe']['total']['ICMSTot']['vNF'] as int).toDouble(),
