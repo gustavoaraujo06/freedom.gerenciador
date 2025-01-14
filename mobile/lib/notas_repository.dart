@@ -23,7 +23,6 @@ class NotasRepository {
 
   static Future<http.Response> getNFE(final String chaveAcesso) async {
     String token = await getToken();
-    print(token);
     return http.get(
         Uri.parse(
             'https://gateway.apiserpro.serpro.gov.br/consulta-nfe-df/api/v1/nfe/$chaveAcesso'),

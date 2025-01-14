@@ -29,16 +29,3 @@ class NotaFiscal {
         );
       }
 }
-class NotaFiscalResume{
-  String emitente;
-  double valor;
-  DateTime data;
-  NotaFiscalResume({required this.emitente, required this.valor, required this.data});
-  factory NotaFiscalResume.fromJson(Map<String, dynamic> json){
-    return NotaFiscalResume(
-      emitente: json['nfeProc']['NFe']['infNFe']['emit']['xFant'],
-      valor: (json['nfeProc']['NFe']['infNFe']['total']['ICMSTot']['vNF'] as int).toDouble(),
-      data: DateTime.parse(json['nfeProc']['NFe']['infNFe']['ide']['dhEmi'])
-    );
-  }
-}
