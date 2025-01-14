@@ -270,8 +270,8 @@ class NotaFiscalField extends StatelessWidget {
 
 class NotaFiscalCard extends StatelessWidget {
   final String label;
-  List<List<Widget>> children;
-  NotaFiscalCard({super.key, required this.label, required this.children});
+  final List<List<Widget>> children;
+  const NotaFiscalCard({super.key, required this.label, required this.children});
   @override
   Widget build(BuildContext context) {
     return Column(

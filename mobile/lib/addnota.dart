@@ -1,7 +1,11 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:mobile/confirmNota.dart';
 import 'package:mobile/loadingdialog.dart';
+import 'package:mobile/models/notafiscal.dart';
+import 'package:mobile/notas_repository.dart';
 
 class AddNota extends StatefulWidget {
   const AddNota({super.key});
@@ -11,6 +15,7 @@ class AddNota extends StatefulWidget {
 
 class AddNotaState extends State<AddNota> {
   bool isLoading = false;
+  final TextEditingController _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
@@ -25,6 +30,7 @@ class AddNotaState extends State<AddNota> {
                 children: [
                   Expanded(
                       child: TextField(
+                        controller: _controller,
                     decoration: InputDecoration(
                       labelText: "Número da Nota",
                     ),
@@ -33,34 +39,54 @@ class AddNotaState extends State<AddNota> {
                     onPressed: () {
                       setState(() {
                         isLoading = true;
-                        Future.delayed(const Duration(seconds: 2), () {
-                          if (mounted) {
+
+                        if (mounted) {
+                          
+                          NotasRepository.getNFE(_controller.text).then((response) {
                             setState(() {
                               isLoading = false;
                             });
-                            
-                          }
-                        });
+                            if (response.statusCode == 200) {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return ConfirmNota(
+                                        notaResumo: NotaFiscalResume.fromJson(jsonDecode(response.body) as Map<String, dynamic>)
+                                    );
+                                  });
+                            } else {
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return ErrorDialog(message: "Nota Fiscal Não Encontrada");
+                                  });
+                            }
+                          });
+                        }
                       });
                     },
                     style: ElevatedButton.styleFrom(
-                      shape: CircleBorder(),
-                      backgroundColor: theme.colorScheme.secondary,
-                      iconColor: theme.colorScheme.onSecondary,
-                      foregroundColor: theme.colorScheme.onSecondary,
-                      minimumSize: Size(48, 48),
-                      padding: EdgeInsets.zero
-                    ),
-                    child: isLoading ? SizedBox(
-                      width: theme.iconTheme.size,
-                      height: theme.iconTheme.size,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 3,
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                          theme.colorScheme.onSecondary,
-                        ),
-                      ),
-                    ): Icon(Icons.search, size: theme.iconTheme.size,),
+                        shape: CircleBorder(),
+                        backgroundColor: theme.colorScheme.secondary,
+                        iconColor: theme.colorScheme.onSecondary,
+                        foregroundColor: theme.colorScheme.onSecondary,
+                        minimumSize: Size(48, 48),
+                        padding: EdgeInsets.zero),
+                    child: isLoading
+                        ? SizedBox(
+                            width: theme.iconTheme.size,
+                            height: theme.iconTheme.size,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 3,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                theme.colorScheme.onSecondary,
+                              ),
+                            ),
+                          )
+                        : Icon(
+                            Icons.search,
+                            size: theme.iconTheme.size,
+                          ),
                   )
                 ],
               ),
