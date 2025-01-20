@@ -1,6 +1,5 @@
 import "package:flutter/material.dart";
 import "package:intl/intl.dart";
-import "package:mobile/models/notafiscal.dart";
 import "package:mobile/notas_repository.dart";
 import "package:mobile/views/notafiscal_page.dart";
 import "package:provider/provider.dart";

@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:mobile/models/pessoa.dart';
 import 'package:mobile/models/pessoa_juridica.dart';
 import 'package:mobile/models/produto.dart';

@@ -38,6 +38,7 @@ dependencies:
   fl_chart: ^0.70.0
   http: ^1.2.2
   provider: ^6.1.2
+  mobile_scanner: ^6.0.3
 
 dev_dependencies:
   flutter_test:

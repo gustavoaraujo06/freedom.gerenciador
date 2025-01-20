@@ -200,19 +200,6 @@ class LineChartExpensesMonth extends StatelessWidget {
         lineBarsData: [
           LineChartBarData(
             spots: [
-              FlSpot(0, barGroups[0].barRods[1].toY),
-              FlSpot(1, barGroups[1].barRods[1].toY),
-              FlSpot(2, barGroups[2].barRods[1].toY),
-              FlSpot(3, barGroups[3].barRods[1].toY),
-              FlSpot(4, barGroups[4].barRods[1].toY),
-              FlSpot(5, barGroups[5].barRods[1].toY),
-            ],
-            isCurved: false,
-            barWidth: 3,
-            color: theme.colorScheme.secondary,
-          ),
-          LineChartBarData(
-            spots: [
               FlSpot(0, barGroups[0].barRods[0].toY),
               FlSpot(1, barGroups[1].barRods[0].toY),
               FlSpot(2, barGroups[2].barRods[0].toY),

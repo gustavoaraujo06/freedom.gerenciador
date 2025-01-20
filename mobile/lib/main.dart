@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/addnota.dart';
 import 'package:mobile/dashboard.dart';
-import 'package:mobile/loadingdialog.dart';
 import 'package:mobile/notas_repository.dart';
 import 'package:mobile/notaswidget.dart';
 import 'package:provider/provider.dart';

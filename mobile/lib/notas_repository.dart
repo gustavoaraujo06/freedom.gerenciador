@@ -2,11 +2,7 @@ import 'dart:collection';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:mobile/models/endereco.dart';
 import 'package:mobile/models/notafiscal.dart';
-import 'package:mobile/models/pessoa_fisica.dart';
-import 'package:mobile/models/pessoa_juridica.dart';
-import 'package:mobile/models/produto.dart';
 import 'package:http/http.dart' as http;
 
 class NotasRepository extends ChangeNotifier {

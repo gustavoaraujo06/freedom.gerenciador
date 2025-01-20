@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:mobile/models/notafiscal.dart';
 import 'package:intl/intl.dart';
@@ -13,7 +11,7 @@ class NotafiscalPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Nota 13513"),
+        title: Text("Dados Nota Fiscal"),
       ),
       body: Column(
         children: [
@@ -63,7 +61,7 @@ class NotafiscalPage extends StatelessWidget {
                       [
                         NotaFiscalField(
                             label: "Endereco",
-                            value: "Rua dos Bobos, 0, Centro, São Paulo - SP")
+                            value: notaFiscal.emitente.endereco.toString())
                       ]
                     ]),
                     NotaFiscalCard(label: "Produtos", children: [
@@ -227,10 +225,10 @@ class NotafiscalPage extends StatelessWidget {
                                     ],
                                   );
                                 }),
-                            child: Text("Ver Impostos"),
                             style: TextButton.styleFrom(
                                 backgroundColor: Colors.amber,
-                                foregroundColor: Colors.black)),
+                                foregroundColor: Colors.black),
+                            child: Text("Ver Impostos")),
                       ]
                     ])
                   ]))
@@ -244,8 +242,7 @@ class NotaFiscalField extends StatelessWidget {
   final String label;
   final String value;
 
-  const NotaFiscalField({Key? key, required this.label, required this.value})
-      : super(key: key);
+  const NotaFiscalField({super.key, required this.label, required this.value});
 
   @override
   Widget build(BuildContext context) {

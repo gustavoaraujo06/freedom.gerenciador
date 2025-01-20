@@ -14,4 +14,8 @@ class Endereco{
       numero: json['nro'] != 'SN' ? json['nro'] : 0
     );
   }
+  @override
+  String toString() {
+    return "$logradouro, $numero - $municipio/$estado";
+  }
 }
