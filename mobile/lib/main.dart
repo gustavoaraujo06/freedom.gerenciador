@@ -3,6 +3,7 @@ import 'package:mobile/addnota.dart';
 import 'package:mobile/dashboard.dart';
 import 'package:mobile/notas_repository.dart';
 import 'package:mobile/notaswidget.dart';
+import 'package:mobile/workers.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -96,6 +97,10 @@ class NotasHomeState extends State<NotasHome> {
             icon: Icon(Icons.receipt),
             label: "Notas",
           ),
+           NavigationDestination(
+            icon: Icon(Icons.people),
+            label: "Funcionarios",
+          ),
         ],
         selectedIndex: navigationIndex,
         onDestinationSelected: (value) =>
@@ -107,6 +112,7 @@ class NotasHomeState extends State<NotasHome> {
       body: [
         Dashboard(),
         NotasWidget(),
+        Workers(),
       ][navigationIndex],
     );
   }
