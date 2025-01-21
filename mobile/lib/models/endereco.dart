@@ -1,6 +1,6 @@
 class Endereco{
   final String logradouro;
-  final int numero;
+  final String numero;
   final String municipio;
   final String estado;
   final String pais;
@@ -11,7 +11,7 @@ class Endereco{
       estado: json['UF'],
       pais: json['xPais'],
       logradouro: json['xLgr'],
-      numero: json['nro'] != 'SN' ? json['nro'] : 0
+      numero: json['nro'] is String ? json['nro'] : json['nro'].toString(),
     );
   }
   @override
