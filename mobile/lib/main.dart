@@ -3,6 +3,7 @@ import 'package:mobile/addnota.dart';
 import 'package:mobile/dashboard.dart';
 import 'package:mobile/notas_repository.dart';
 import 'package:mobile/notaswidget.dart';
+import 'package:mobile/views/stock_page.dart';
 import 'package:mobile/workers.dart';
 import 'package:provider/provider.dart';
 
@@ -101,6 +102,10 @@ class NotasHomeState extends State<NotasHome> {
             icon: Icon(Icons.people),
             label: "Funcionarios",
           ),
+          NavigationDestination(
+            icon: Icon(Icons.pallet),
+            label: "Estoque",
+          ),
         ],
         selectedIndex: navigationIndex,
         onDestinationSelected: (value) =>
@@ -113,6 +118,7 @@ class NotasHomeState extends State<NotasHome> {
         Dashboard(),
         NotasWidget(),
         Workers(),
+        StockPage(item: StockItem(name: "Sofa", measure: "Unidade", quantity: 155, pictureUrl: "https://a-static.mlcdn.com.br/800x560/sofa-retratil-reclinavel-zurique-250m-suede-velut-cinza-c-molas-no-assento-king-house/kingkongcomeletronico/250884x487445/f72674347aa24cd07234ba27a2592514.jpeg"),)
       ][navigationIndex],
     );
   }
