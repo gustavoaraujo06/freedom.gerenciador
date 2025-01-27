@@ -59,7 +59,6 @@ class WorkerPage extends StatelessWidget {
                 const SizedBox(height: 10),
                 ElevatedButton(
                   onPressed: () {
-                    // Implement your Nubank payment logic here
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text("Processando pagamento via NuPay...")),
                     );

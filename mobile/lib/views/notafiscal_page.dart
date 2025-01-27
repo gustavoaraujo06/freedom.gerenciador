@@ -71,7 +71,7 @@ class NotafiscalPage extends StatelessWidget {
                             showModalBottomSheet(
                                 context: context,
                                 builder: (context) {
-                                  return SingleChildScrollView(
+                                return SingleChildScrollView(
                                       child: Padding(
                                     padding: EdgeInsets.all(10),
                                     child: Column(

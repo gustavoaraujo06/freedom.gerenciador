@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -82,24 +81,17 @@ Map<String, double> groupExpenses(List<NotaFiscal> expenses, GroupBy groupBy) {
 
     switch (groupBy) {
       case GroupBy.day:
-        // Ex: 2024-01-31
         key = DateFormat('yyyy-MM-dd').format(data);
         break;
 
       case GroupBy.week:
-        // Precisamos calcular qual é a “semana do ano”.
-        // Uma forma simples é usar DateFormat('yyyy-ww'),
-        // mas cuidado: 'ww' segue a semana ISO (pode começar na segunda).
-        // Exemplo usando 'yyyy-ww':
         key = DateFormat('yyyy-ww').format(data);
         break;
 
       case GroupBy.month:
-        // Ex: 2024-01
         key = DateFormat('yyyy-MM').format(data);
         break;
       case GroupBy.year:
-        // Ex: 2024-01
         key = DateFormat('yyyy').format(data);
         break;
     }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
 class ScanNota extends StatefulWidget {
-  const ScanNota({Key? key}) : super(key: key);
+  const ScanNota({super.key});
 
   @override
   State<ScanNota> createState() => _ScanNotaState();
