@@ -1,34 +1,35 @@
-'use client'
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "@coreui/coreui-pro/dist/css/coreui.min.css";
+import "./globals.css";
+import AppSideBar from "@/app/components/appSidebar/appSideBar";
+import { CContainer, CHeader } from "@coreui/react-pro";
+import AppHeader from "./components/appHeader/appHeader";
+import AppBreadcrumb from "./components/appBreadcrumb/appBreadcrumb";
 
-import Script from 'next/script'
+export const metadata: Metadata = {
+  title: "FreedomIT Gerenciador",
+};
 
-import { Provider } from 'react-redux'
-import store from './../store'
-import './../styles/style.scss'
-// We use those styles to show code examples, you should remove them in your application.
-import './../styles/examples.scss'
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="en">
-      <head>
-        <title>FreedomIT Gerenciador</title>
-        <Script
-          id="get-color-scheme"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-        const userMode = localStorage.getItem('coreui-pro-next-js-admin-template-theme-modern');
-        const systemDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (userMode === 'dark' || (userMode !== 'light' && systemDarkMode)) {
-          document.documentElement.dataset.coreuiTheme = 'dark';
-        }`,
-          }}
-        />
-      </head>
-      <body>
-        <Provider store={store}>{children}</Provider>
+    <html>
+      <body className="d-flex flex-row">
+        <AppSideBar />
+        <div className="d-flex flex-column min-vh-100 w-100">
+          <AppHeader/>
+          <div className="body flex-grow-1" style={{width: "100%"}}>
+            <AppBreadcrumb/>
+            <CContainer lg>
+              {children}
+            </CContainer>
+          </div>
+        </div>
       </body>
     </html>
-  )
+  );
 }

@@ -1,0 +1,12 @@
+:root {
+  --cui-sidebar-bg: #{$sidebar-bg};
+  --cui-sidebar-color: #{$sidebar-color};
+}
+@font-face {
+  font-family: "Montserrat";
+  src: url("../../public/fonts/montserrat/Montserrat-Regular.ttf") format("truetype");
+  font-weight: 400;
+}
+body{
+  font-family: "Montserrat"
+}
