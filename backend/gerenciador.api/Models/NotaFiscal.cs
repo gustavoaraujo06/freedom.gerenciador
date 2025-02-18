@@ -40,5 +40,6 @@
         public string RazaoSocialTransportadora { get; set; }
         public string CnpjTerceiro { get; set; }
         public string RazaoSocialTerceiro { get; set; }
+        public ICollection<Produto> Produtos { get; set; }
     }
 }

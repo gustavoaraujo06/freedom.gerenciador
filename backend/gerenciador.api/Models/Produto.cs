@@ -11,7 +11,7 @@
         public string Descricao { get; set; }             // xProd
         public string UnidadeTributo { get; set; }        // uTrib
         public double ValorDesconto { get; set; }        // vDesc
-        public long Ncm { get; set; }                     // NCM
+        public long NCM { get; set; }                     // NCM
         public string UnidadeComercial { get; set; }      // uCom
         public int CFOP { get; set; }                     // CFOP
         public string Cest { get; set; }                  // CEST
@@ -28,39 +28,26 @@
 
     public class ICMS
     {
-        public ICMS60 ICMS60 { get; set; }
-    }
-
-    public class ICMS60
-    {
         public double PST { get; set; }           // pST
-        public int Origem { get; set; }           // orig
-        public int CST { get; set; }              // CST
+        public double Origem { get; set; }           // orig
+        public double CST { get; set; }              // CST
         public double ValorBaseSubstituicao { get; set; } // vBCSTRet
         public double ValorICMSSubstituto { get; set; }   // vICMSSubstituto
         public double ValorICMSSubstitutoRetido { get; set; }  // vICMSSTRet
     }
 
+
     public class IPI
     {
         public int CodigoEnquadramento { get; set; }  // cEnq
-        public IPITrib IPITrib { get; set; }
-    }
-
-    public class IPITrib
-    {
         public int CST { get; set; }            // CST
         public double QuantidadeUnidade { get; set; } // qUnid
         public double ValorIPI { get; set; }    // vIPI
         public double ValorUnidade { get; set; } // vUnid
+
     }
 
     public class COFINS
-    {
-        public COFINSAliq COFINSAliq { get; set; }
-    }
-
-    public class COFINSAliq
     {
         public double ValorCOFINS { get; set; } // vCOFINS
         public string CST { get; set; }         // CST
@@ -68,12 +55,9 @@
         public double PercentualCOFINS { get; set; } // pCOFINS
     }
 
-    public class PIS
-    {
-        public PISAliq PISAliq { get; set; }
-    }
 
-    public class PISAliq
+
+    public class PIS
     {
         public double ValorPIS { get; set; }   // vPIS
         public string CST { get; set; }        // CST
