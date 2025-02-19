@@ -3,43 +3,34 @@
     public class NotaFiscal
     {
         public int Id { get; set; }
-        public string Numero { get; set; }
-        public string Serie { get; set; }
-        public string ChaveAcesso { get; set; }
-        public string DataEmissao { get; set; }
-        public string DataEntradaSaida { get; set; }
-        public string ValorTotal { get; set; }
-        public string ValorProdutos { get; set; }
-        public string ValorFrete { get; set; }
-        public string ValorSeguro { get; set; }
-        public string ValorDesconto { get; set; }
-        public string ValorOutrasDespesas { get; set; }
-        public string ValorIpi { get; set; }
-        public string ValorPis { get; set; }
-        public string ValorCofins { get; set; }
-        public string ValorIcms { get; set; }
-        public string ValorIcmsSt { get; set; }
-        public string ValorIss { get; set; }
-        public string ValorRetidoPis { get; set; }
-        public string ValorRetidoCofins { get; set; }
-        public string ValorRetidoCsll { get; set; }
-        public string ValorRetidoIrrf { get; set; }
-        public string ValorRetidoInss { get; set; }
-        public string ValorRetidoFunrural { get; set; }
-        public string ValorRetidoIcms { get; set; }
-        public string ValorRetidoIss { get; set; }
-        public string ValorRetido { get; set; }
-        public string ValorLiquido { get; set; }
-        public string ValorAproxTributos { get; set; }
-        public string Observacoes { get; set; }
-        public string CnpjEmitente { get; set; }
-        public string RazaoSocialEmitente { get; set; }
-        public string CnpjDestinatario { get; set; }
-        public string RazaoSocialDestinatario { get; set; }
-        public string CnpjTransportadora { get; set; }
-        public string RazaoSocialTransportadora { get; set; }
-        public string CnpjTerceiro { get; set; }
-        public string RazaoSocialTerceiro { get; set; }
-        public ICollection<Produto> Produtos { get; set; }
+        public int TipoNota { get; set; }
+        public double ValorCofins { get; set; }          // vCOFINS
+        public double ValorBaseCalculoICMS { get; set; }             // vBCST
+        public double ValorIcmsDesonerado { get; set; }    // vICMSDeson
+        public double ValorProdutos { get; set; }        // vProd
+        public double ValorSeguro { get; set; }          // vSeg
+        public double ValorFCP { get; set; }             // vFCP
+        public double ValorFCPST { get; set; }           // vFCPST
+        public double ValorNotaFiscal { get; set; }      // vNF
+        public double ValorPis { get; set; }             // vPIS
+        public double ValorIpiDevolvido { get; set; }      // vIPIDevol
+        public double ValorBaseCalculo { get; set; }          // vBC
+        public double ValorST { get; set; }              // Somatório do valor do ICMS com Substituição Tributária de todos os produtos da NF-e
+        public double ValorICMS { get; set; }            // vICMS
+        public double ValorImpostoImportacao { get; set; }              // Somatório do valor do Imposto de Importação de todos os produtos da NF-e
+        public double ValorFCPSTRet { get; set; }        // vFCPSTRet
+        public double ValorDescontoTotal { get; set; }   // vDesc
+        public double ValorOutro { get; set; }           // vOutro
+        public double ValorIPI { get; set; }             // vIPI
+        public double ValorFrete { get; set; }
+        public int IndicadorPresenca { get; set; }
+        public DateTime DataEmissao { get; set; }
+        public DateTime DataSaidaMercadoria { get; set; }
+        public required string NaturezaOperacao { get; set; }
+
+        public required Cobranca Cobranca{ get; set; }
+        public required Pagamento Pagamento { get; set; }
+
+        public required ICollection<Produto> Produtos { get; set; }
     }
 }

@@ -2,66 +2,66 @@
 {
     public class Produto
     {
-        public int PedidoNumero { get; set; }            // xPed
-        public long CodigoEAN { get; set; }              // cEAN
-        public string CodigoProduto { get; set; }        // cProd
-        public double QuantidadeComercial { get; set; } // qCom
-        public long CodigoEANTributo { get; set; }        // cEANTrib
-        public double ValorProduto { get; set; }          // vProd
-        public string Descricao { get; set; }             // xProd
-        public string UnidadeTributo { get; set; }        // uTrib
-        public double ValorDesconto { get; set; }        // vDesc
-        public long NCM { get; set; }                     // NCM
-        public string UnidadeComercial { get; set; }      // uCom
-        public int CFOP { get; set; }                     // CFOP
-        public string Cest { get; set; }                  // CEST
-        public Imposto Imposto { get; set; }
+        public required int PedidoNumero { get; set; }            // xPed
+        public required long CodigoEAN { get; set; }              // cEAN
+        public required string CodigoProduto { get; set; }        // cProd
+        public required double QuantidadeComercial { get; set; } // qCom
+        public required long CodigoEANTributo { get; set; }        // cEANTrib
+        public required double ValorProduto { get; set; }          // vProd
+        public required string Descricao { get; set; }             // xProd
+        public required string UnidadeTributo { get; set; }        // uTrib
+        public required double ValorDesconto { get; set; }        // vDesc
+        public required long NCM { get; set; }                     // NCM
+        public required string UnidadeComercial { get; set; }      // uCom
+        public required int CFOP { get; set; }                     // CFOP
+        public required string Cest { get; set; }     
+        public required Imposto Imposto { get; set; }
 
     }
     public class Imposto
     {
-        public ICMS ICMS { get; set; }
-        public IPI IPI { get; set; }
-        public COFINS COFINS { get; set; }
-        public PIS PIS { get; set; }
+        public required ICMS ICMS { get; set; }
+        public required IPI IPI { get; set; }
+        public required COFINS COFINS { get; set; }
+        public required PIS PIS { get; set; }
     }
 
     public class ICMS
     {
-        public double PST { get; set; }           // pST
-        public double Origem { get; set; }           // orig
-        public double CST { get; set; }              // CST
-        public double ValorBaseSubstituicao { get; set; } // vBCSTRet
-        public double ValorICMSSubstituto { get; set; }   // vICMSSubstituto
-        public double ValorICMSSubstitutoRetido { get; set; }  // vICMSSTRet
+        public required double PST { get; set; }           // pST
+        public required double Origem { get; set; }           // orig
+        public required double CST { get; set; }              // CST
+        public required double ValorBaseSubstituicao { get; set; } // vBCSTRet
+        public required double ValorICMSSubstituto { get; set; }   // vICMSSubstituto
+        public required double ValorICMSSubstitutoRetido { get; set; }  // vICMSSTRet
     }
 
 
     public class IPI
     {
-        public int CodigoEnquadramento { get; set; }  // cEnq
-        public int CST { get; set; }            // CST
-        public double QuantidadeUnidade { get; set; } // qUnid
-        public double ValorIPI { get; set; }    // vIPI
-        public double ValorUnidade { get; set; } // vUnid
+        public required int CodigoEnquadramento { get; set; }  // cEnq
+        public required int CST { get; set; }            // CST
+        public required double QuantidadeUnidade { get; set; } // qUnid
+        public required double ValorIPI { get; set; }    // vIPI
+        public required double ValorUnidade { get; set; } // vUnid
 
     }
 
     public class COFINS
     {
-        public double ValorCOFINS { get; set; } // vCOFINS
-        public string CST { get; set; }         // CST
-        public double ValorBase { get; set; }     // vBC
-        public double PercentualCOFINS { get; set; } // pCOFINS
+        public required double ValorCOFINS { get; set; } // vCOFINS
+        public required string CST { get; set; }         // CST
+        public required double ValorBase { get; set; }     // vBC
+        public required double PercentualCOFINS { get; set; } // pCOFINS
     }
 
 
 
     public class PIS
     {
-        public double ValorPIS { get; set; }   // vPIS
-        public string CST { get; set; }        // CST
-        public double ValorBase { get; set; }   // vBC
-        public double PercentualPIS { get; set; } // pPIS
+        public required double ValorPIS { get; set; }   // vPIS
+        public required string CST { get; set; }        // CST
+        public required double ValorBase { get; set; }   // vBC
+        public required double PercentualPIS { get; set; } // pPIS
     }
 }
